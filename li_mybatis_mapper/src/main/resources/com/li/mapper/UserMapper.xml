@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.li.mapper.UserMapper">
+    
+    <sql id="userSelect">select * from user</sql>
+<select id="findByCondition" resultType="user" parameterType="user">
+    <!--原始写法
+    select * from  user where 1=1
+       <if test="id!=0">
+           and id=#{id}
+       </if>
+       <if test="username!=null">
+           and username=#{username}
+       </if>
+       <if test="password!=null">
+           and password=#{password}
+       </if>-->
+    <include refid="userSelect"></include>
+    <where>   /*如果where内没有条件，则where不写 。   where遇到第一个and，and自动省略*/
+        <if test="id!=0">
+            and id=#{id}
+        </if>
+        <if test="username!=null">
+            and username=#{username}
+        </if>
+        <if test="password!=null">
+            and password=#{password}
+        </if>
+    </where>
+</select>
+    <select id="findByIds" parameterType="list" resultType="user">
+      select  * from user 
+      <where>
+          <foreach collection="list"  open="id in ("  close=")"    item="id"    separator="," >
+              #{id}
+          </foreach>
+         /*open   以xxx开始   close  以xxx结束    item   每一项，接收前面list中每一项元素,双引号内，随便取名。   separator汉译为-分隔符*/
+          /*collection汉译为 集合   在此处，如果传的是集合  collection=“list”;如果传的是数组,collection=“array”*/
+
+      </where> 
+    </select>
+    <select id="findAll" resultType="user">
+       <include refid="userSelect"></include>
+    </select>
+</mapper>

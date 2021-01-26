@@ -1,0 +1,11 @@
+# Project exclude paths
+/li_mybatis_anno/target/
+/li_mybatis_dao/target/
+/li_mybatis_mapper/target/
+/li_mybatis_multi/target/
+/li_mybatis_quick/target/
+/li_spring_ioc/target/
+/li_spring_ioc_anno/target/
+/li_spring_test/
+/li_spring_test/target/
+/li_ssm/target/

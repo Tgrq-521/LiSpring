@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--加载properties文件-->
+    <properties resource="jdbc.properties"></properties>
+    
+    <!--定义别名-->
+    <typeAliases>
+       <!-- <typeAlias type="com.li.domain.Account" alias="account"></typeAlias>-->
+        <package name="com.li.domain"/><!--扫包，扫过之后，domain下面的所有实体都有了别名，
+                                            Account和account都是实体Account的别名-->
+    </typeAliases>
+
+    <!--环境-->
+    <environments default="de">
+        <environment id="de">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--加载映射-->
+    <mappers>
+       <!-- <mapper resource="com/li/mapper/AccountMapper.xml"></mapper>-->
+        <package name="com.li.mapper"/><!--mapper接口所在的包，加载包下所有文件，为mapper创建实现类-->
+    </mappers>
+</configuration>

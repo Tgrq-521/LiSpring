@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+     <!--无参构造实例化bean-->
+    <bean id="userDaoId" class="com.li.dao.impl.UserDaoImpl" scope="prototype"></bean>
+    <bean id="userServiceId" class="com.li.service.impl.UserServiceImpl">
+        <property name="userDao" ref="userDaoId"></property>
+        <constructor-arg name="list">
+            <list>
+                <value>aaa</value>
+            </list>
+
+        </constructor-arg>
+    </bean>
+</beans>

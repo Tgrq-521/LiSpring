@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.li.mapper.OrdersMapper">
+    <resultMap id="ordersMap" type="orders">
+        <!--手动指定字段与实体属性的映射关系，column：数据表的字段名称；property:实体的属性名称-->
+        <id column="oid" property="id"></id><!--主键用id-->
+        <result column="ordertime" property="ordertime"></result>
+        <result column="total" property="total"></result>
+      <!--  <result column="uid" property="user.id"></result>   第一种封装user的方式
+        <result column="username" property="user.username"></result>
+        <result column="password" property="user.password"></result>
+        <result column="birthday" property="user.birthday"></result>-->
+      <!--  <association property="user" javaType="user">   第二种封装user的方式
+            <id column="uid" property="id"></id>
+            <result column="username" property="username"></result>
+            <result column="password" property="password"></result>
+            <result column="birthday" property="birthday"></result>
+        </association>-->
+        <!--association:与xxx相匹配
+               property:当前实体orders中的属性名称（private User user）
+               javaType:当前实体orders中的属性的类型（User）,之所以写user，因为对com.li.domain.User进行了定义别名
+               -->
+    </resultMap>
+<select id="findAll" resultMap="ordersMap">
+    select  *,o.id oid from orders o,user u where o.uid=u.id
+</select>
+
+</mapper>
